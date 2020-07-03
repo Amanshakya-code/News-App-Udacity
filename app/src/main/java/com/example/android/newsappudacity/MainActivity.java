@@ -23,7 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Newconstructor>> {
 
     private static final int NEWS_LOADER_ID = 1;
-    private static final String GUARDIANS_REQUEST_URL = "http://content.guardianapis.com/search?q=debates&api-key=test";
+    private static final String GUARDIANS_REQUEST_URL = "https://content.guardianapis.com/search?q=debate&tag=politics/politics&from-date=2014-01-01&api-key=test";
     private newsAdapter mAdapter;
     private TextView mEmptyStateTextView;
     private View loadingIndicator;
@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             networkInfo = cm.getActiveNetworkInfo();
         }
         if(networkInfo != null && networkInfo.isConnected()) {
-            android.app.LoaderManager loaderManager = getLoaderManager();
-            loaderManager.initLoader(NEWS_LOADER_ID, null, (android.app.LoaderManager.LoaderCallbacks<Object>) this);
+            getSupportLoaderManager().initLoader(NEWS_LOADER_ID, null,  this);
         }else{
             loadingIndicator.setVisibility(View.GONE);
             mEmptyStateTextView.setText(getString(R.string.no_internet));
