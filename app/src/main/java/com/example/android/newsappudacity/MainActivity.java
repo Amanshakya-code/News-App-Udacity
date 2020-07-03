@@ -23,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Newconstructor>> {
 
     private static final int NEWS_LOADER_ID = 1;
+    private static final String GUARDIAN_KEY = "fd984008-1416-4e41-9a95-f0044f48f5f2";
     private static final String GUARDIANS_REQUEST_URL = "https://content.guardianapis.com/search?&show-tags=contributor&api-key=1205bd93-b6c3-4f90-9eac-eba3ff2c2b02";
     private newsAdapter mAdapter;
     private TextView mEmptyStateTextView;
@@ -76,7 +77,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<List<Newconstructor>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new newLoader(this, GUARDIANS_REQUEST_URL);
+        Uri baseUri= Uri.parse(GUARDIANS_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter("api-key",GUARDIAN_KEY);
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("format", "json");
+        uriBuilder.appendQueryParameter("order-by", "newest");
+        return new newLoader(this, uriBuilder.toString());
     }
 
     @Override
