@@ -53,6 +53,13 @@ public class newsAdapter extends ArrayAdapter<Newconstructor> {
             }else{
                 contentdiscription.setText("DISCRIPTION NOT EXIST");
             }
+            TextView contentauthor= listItemView.findViewById(R.id.authorname);
+            String author= currentnews.getAuthor();
+            if(author!=null){
+                contentauthor.setText(author);
+            }else{
+                contentauthor.setText("AUTHOR NOT PRESENT");
+            }
             TextView contentDate=listItemView.findViewById(R.id.date);
             TextView contenttime=listItemView.findViewById(R.id.TIme);
             String currentdateandtime=currentnews.getWebdateandtime();

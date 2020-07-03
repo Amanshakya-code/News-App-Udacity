@@ -5,12 +5,14 @@ public class Newconstructor {
     private String discription;
     private String url;
     private String webdateandtime;
+    private String author;
 
-    public Newconstructor(String mtitle, String mdiscription, String murl, String mwebdateandtime) {
+    public Newconstructor(String mtitle, String mdiscription, String murl, String mwebdateandtime,String mauthor) {
         this.title = mtitle;
         this.discription = mdiscription;
         this.webdateandtime = mwebdateandtime;
         this.url = murl;
+        this.author=mauthor;
     }
 
     public String getTitle() {
@@ -27,6 +29,9 @@ public class Newconstructor {
 
     public String getUrl() {
         return url;
+    }
+    public String getAuthor(){
+        return author;
     }
 
 }

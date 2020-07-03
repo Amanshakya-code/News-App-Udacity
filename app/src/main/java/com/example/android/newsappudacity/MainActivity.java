@@ -63,7 +63,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                     } else {
                         webIntent.setData(Uri.parse(GUARDIANS_REQUEST_URL));
                     }
-                    startActivity(webIntent);
+                    if (webIntent.resolveActivity(getPackageManager()) != null) {
+
+                        startActivity(webIntent);
+
+                    }
                 }
             }
         });

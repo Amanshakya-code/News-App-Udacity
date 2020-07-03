@@ -114,18 +114,34 @@ public class QueryUtils {
                         } else {
                             dateandtime = null;
                         }
+                        StringBuilder author= new StringBuilder();
+                        JSONArray authorArray = currentJsonobject.getJSONArray ( "tags" );
+                        if (authorArray != null && authorArray.length () > 0) {
+                            for (int j = 0; j < authorArray.length (); j++) {
+                                JSONObject authors = authorArray.getJSONObject ( j );
+                                String authorsListed = authors.optString ( "webTitle" );
+                                if (authorArray.length () > 1) {
+                                    author.append ( authorsListed );
+                                    author.append ( "\t\t\t" );
+                                } else {
+                                    author.append ( authorsListed );
+                                }
+                            }
+                        } else {
+                            author.replace ( 0, 3, "No author(s) listed" );
+                        }
                         String webUrl;
                         if (currentJsonobject.has("webUrl")) {
                             webUrl = currentJsonobject.getString("webUrl");
                         } else {
                             webUrl = null;
                         }
-                        news.add(new Newconstructor(tiTle, discRiption, webUrl, dateandtime));
+                        news.add(new Newconstructor(tiTle, discRiption, webUrl, dateandtime,author.toString()));
                     }
                 }
             }
         } catch (JSONException e) {
-            Log.e(LOG_TAG, "problem", e);
+            Log.e(LOG_TAG, "problem with parsing", e);
         }
         return news;
     }

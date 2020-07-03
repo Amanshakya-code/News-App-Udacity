@@ -56,5 +56,14 @@
         android:textColor="#C003A9F4"
         android:layout_below="@+id/Discription"
         />
+    <TextView
+        android:id="@+id/authorname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="by: Author"
+        android:layout_below="@+id/TIme"
+        android:layout_alignParentEnd="true"
+        android:textColor="#36434E"
+        />
 
 </RelativeLayout>
