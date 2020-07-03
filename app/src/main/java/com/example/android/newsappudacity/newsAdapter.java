@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,18 +54,24 @@ public class newsAdapter extends ArrayAdapter<Newconstructor> {
             }else{
                 contentdiscription.setText("DISCRIPTION NOT EXIST");
             }
-            TextView contentauthor= listItemView.findViewById(R.id.authorname);
-            String author= currentnews.getAuthor();
-            if(author!=null){
-                contentauthor.setText(author);
+            TextView authorsTextView = listItemView.findViewById(R.id.authorname);
+            ArrayList<String> authorsArray = currentnews.getAuthors();
+            if(authorsArray == null ){
+                authorsTextView.setText("UNKNOWN AUTHOR");
             }else{
-                contentauthor.setText("AUTHOR NOT PRESENT");
+                StringBuilder authorString = new StringBuilder("By:-");
+                for(int i=0;i<authorsArray.size(); i++){
+                    authorString.append(authorsArray.get(i));
+                    if((i + 1) < authorsArray.size()){
+                        authorString.append(", ");
+                    }
+                }
+                authorsTextView.setText(authorString.toString());
+                authorsTextView.setVisibility(View.VISIBLE);
             }
             TextView contentDate=listItemView.findViewById(R.id.date);
             TextView contenttime=listItemView.findViewById(R.id.TIme);
             String currentdateandtime=currentnews.getWebdateandtime();
-            Log.e(TAG, "getView:----------------------- " + currentdateandtime);
-
             if(currentdateandtime!=null){
 
                     String date= formattedDate(currentdateandtime);

@@ -1,18 +1,20 @@
 package com.example.android.newsappudacity;
 
+import java.util.ArrayList;
+
 public class Newconstructor {
     private String title;
     private String discription;
     private String url;
     private String webdateandtime;
-    private String author;
+    private ArrayList<String> authors;
 
-    public Newconstructor(String mtitle, String mdiscription, String murl, String mwebdateandtime,String mauthor) {
+    public Newconstructor(String mtitle, String mdiscription, String murl, String mwebdateandtime,ArrayList<String> mauthor) {
         this.title = mtitle;
         this.discription = mdiscription;
         this.webdateandtime = mwebdateandtime;
         this.url = murl;
-        this.author=mauthor;
+        this.authors=mauthor;
     }
 
     public String getTitle() {
@@ -30,8 +32,8 @@ public class Newconstructor {
     public String getUrl() {
         return url;
     }
-    public String getAuthor(){
-        return author;
+    ArrayList<String> getAuthors() {
+        return authors;
     }
 
 }

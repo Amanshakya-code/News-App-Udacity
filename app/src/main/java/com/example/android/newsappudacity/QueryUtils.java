@@ -114,21 +114,19 @@ public class QueryUtils {
                         } else {
                             dateandtime = null;
                         }
-                        StringBuilder author= new StringBuilder();
-                        JSONArray authorArray = currentJsonobject.getJSONArray ( "tags" );
-                        if (authorArray != null && authorArray.length () > 0) {
-                            for (int j = 0; j < authorArray.length (); j++) {
-                                JSONObject authors = authorArray.getJSONObject ( j );
-                                String authorsListed = authors.optString ( "webTitle" );
-                                if (authorArray.length () > 1) {
-                                    author.append ( authorsListed );
-                                    author.append ( "\t\t\t" );
-                                } else {
-                                    author.append ( authorsListed );
+                        ArrayList<String> authors = new ArrayList<>();
+                        if(currentJsonobject.has("tags")) {
+                            JSONArray currentTagsArray = currentJsonobject.getJSONArray("tags");
+                            if (currentTagsArray == null || currentTagsArray.length() == 0) {
+                                authors = null;
+                            } else {
+                                for (int j = 0; j < currentTagsArray.length(); j++) {
+                                    JSONObject currentObjectInTags = currentTagsArray.getJSONObject(j);
+                                    authors.add(currentObjectInTags.getString("webTitle"));
                                 }
                             }
-                        } else {
-                            author.replace ( 0, 3, "No author(s) listed" );
+                        }else{
+                            authors = null;
                         }
                         String webUrl;
                         if (currentJsonobject.has("webUrl")) {
@@ -136,7 +134,7 @@ public class QueryUtils {
                         } else {
                             webUrl = null;
                         }
-                        news.add(new Newconstructor(tiTle, discRiption, webUrl, dateandtime,author.toString()));
+                        news.add(new Newconstructor(tiTle, discRiption, webUrl, dateandtime,authors));
                     }
                 }
             }
