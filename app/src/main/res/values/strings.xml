@@ -2,5 +2,6 @@
     <string name="app_name">newsAppudacity</string>
     <string name="no_internet">NO INTERNET CONNECTION PLEASE CHECK YOUR WIFI/DATA</string>
     <string name="nonews">OOPS NO NEWS FOUND YET</string>
+    <string name="for_more_info_click_here">For more info click here</string>
 
 </resources>

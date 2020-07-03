@@ -3,27 +3,24 @@ package com.example.android.newsappudacity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ParseException;
-import android.os.TestLooperManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.TimeZone;
 
 public class newsAdapter extends ArrayAdapter<Newconstructor> {
     private static final String LOG_TAG = newsAdapter.class.getName();
     private Context context;
+    private static final String TAG = "newsAdapter";
 
 
     public newsAdapter(Context context, List<Newconstructor> newconstructors) {
@@ -59,19 +56,17 @@ public class newsAdapter extends ArrayAdapter<Newconstructor> {
             TextView contentDate=listItemView.findViewById(R.id.date);
             TextView contenttime=listItemView.findViewById(R.id.TIme);
             String currentdateandtime=currentnews.getWebdateandtime();
+            Log.e(TAG, "getView:----------------------- " + currentdateandtime);
+
             if(currentdateandtime!=null){
-                try{
-                    String date= getdate(currentdateandtime);
-                    String time= gettime(currentdateandtime);
+
+                    String date= formattedDate(currentdateandtime);
                     contentDate.setText(date);
                     contentDate.setVisibility(View.VISIBLE);
-                    contenttime.setText(time);
                     contenttime.setVisibility(View.VISIBLE);
 
-                }catch (java.text.ParseException e){
-                    Log.e(LOG_TAG,"PROBLEM IN DATE AND TIME",e);
                 }
-            }else {
+            else {
                 contentDate.setText("NO DATE EXIST");
                 contenttime.setText("NO TIME EXIST");
             }
@@ -79,17 +74,18 @@ public class newsAdapter extends ArrayAdapter<Newconstructor> {
         }
         return listItemView;
     }
-    private String getdate(String currentDateAndTime) throws java.text.ParseException {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfDate = new SimpleDateFormat("LLL dd, yyy");
-        return sdfDate.format(Objects.requireNonNull(sdf.parse(currentDateAndTime)));
-    }
-
-    private String gettime(String currentDateAndTime) throws java.text.ParseException {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("h:mm a");
-        sdfTime.setTimeZone(TimeZone.getTimeZone("UTC"));
-        return sdfTime.format(Objects.requireNonNull(sdf.parse(currentDateAndTime)));
+    private String formattedDate(String utcTime) {
+        Date date = null;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        try {
+            date = format.parse(utcTime.replaceAll("Z$", "+0000"));
+        } catch (ParseException | java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        assert date != null;
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        return "DATE:-"+dateFormat.format(date) + "\n" +"TIME:-"+ timeFormat.format(date);
     }
 
 }

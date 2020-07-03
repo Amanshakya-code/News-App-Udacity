@@ -28,23 +28,24 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private TextView mEmptyStateTextView;
     private View loadingIndicator;
     private ListView newsListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mEmptyStateTextView=findViewById(R.id.empty_view);
-        loadingIndicator=findViewById(R.id.loading_indicator);
-        newsListView=findViewById(R.id.list);
-        mAdapter = new newsAdapter(this,new ArrayList<Newconstructor>());
+        mEmptyStateTextView = findViewById(R.id.empty_view);
+        loadingIndicator = findViewById(R.id.loading_indicator);
+        newsListView = findViewById(R.id.list);
+        mAdapter = new newsAdapter(this, new ArrayList<Newconstructor>());
         newsListView.setAdapter(mAdapter);
-        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = null;
         if (cm != null) {
             networkInfo = cm.getActiveNetworkInfo();
         }
-        if(networkInfo != null && networkInfo.isConnected()) {
-            getSupportLoaderManager().initLoader(NEWS_LOADER_ID, null,  this);
-        }else{
+        if (networkInfo != null && networkInfo.isConnected()) {
+            getSupportLoaderManager().initLoader(NEWS_LOADER_ID, null, this);
+        } else {
             loadingIndicator.setVisibility(View.GONE);
             mEmptyStateTextView.setText(getString(R.string.no_internet));
             mEmptyStateTextView.setVisibility(View.VISIBLE);
@@ -57,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 if (currentNews != null) {
                     String webUrl = currentNews.getUrl();
                     Intent webIntent = new Intent(Intent.ACTION_VIEW);
-                    if(webUrl != null){
+                    if (webUrl != null) {
                         webIntent.setData(Uri.parse(webUrl));
-                    }else{
+                    } else {
                         webIntent.setData(Uri.parse(GUARDIANS_REQUEST_URL));
                     }
                     startActivity(webIntent);
@@ -80,13 +81,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mEmptyStateTextView.setText(getString(R.string.nonews));
         newsListView.setEmptyView(mEmptyStateTextView);
         mAdapter.clear();
-        if(data != null && !data.isEmpty()){
+        if (data != null && !data.isEmpty()) {
             mAdapter.addAll(data);
         }
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<Newconstructor>> loader) {
-            mAdapter.clear();
+        mAdapter.clear();
     }
 }
