@@ -68,7 +68,7 @@ public class newsAdapter extends ArrayAdapter<Newconstructor> {
                     contenttime.setText(time);
                     contenttime.setVisibility(View.VISIBLE);
 
-                }catch (ParseException | java.text.ParseException e){
+                }catch (java.text.ParseException e){
                     Log.e(LOG_TAG,"PROBLEM IN DATE AND TIME",e);
                 }
             }else {
@@ -80,13 +80,13 @@ public class newsAdapter extends ArrayAdapter<Newconstructor> {
         return listItemView;
     }
     private String getdate(String currentDateAndTime) throws java.text.ParseException {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfDate = new SimpleDateFormat("LLL dd, yyy");
         return sdfDate.format(Objects.requireNonNull(sdf.parse(currentDateAndTime)));
     }
 
     private String gettime(String currentDateAndTime) throws java.text.ParseException {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\\'T\\'HH:mm:ss\\'Z\\'");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdfTime = new SimpleDateFormat("h:mm a");
         sdfTime.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdfTime.format(Objects.requireNonNull(sdf.parse(currentDateAndTime)));
