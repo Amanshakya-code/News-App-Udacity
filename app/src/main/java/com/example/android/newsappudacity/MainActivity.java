@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public Loader<List<Newconstructor>> onCreateLoader(int id, @Nullable Bundle args) {
         Uri baseUri= Uri.parse(GUARDIANS_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        uriBuilder.appendQueryParameter("api-key",GUARDIAN_KEY);
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("order-by", "newest");
