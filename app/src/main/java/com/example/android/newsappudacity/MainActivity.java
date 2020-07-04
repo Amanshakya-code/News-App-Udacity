@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("order-by", "newest");
-        uriBuilder.appendQueryParameter("page-size", "30");
+        uriBuilder.appendQueryParameter("page-size", "50");
         return new newLoader(this, uriBuilder.toString());
     }
 
