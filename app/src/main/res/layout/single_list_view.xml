@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="6dp"
-    android:background="#ECE07E">
+    android:background="#000000">
 
 
         <TextView
@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
             android:textAllCaps="true"
-            android:textColor="#36434E"
+            android:textColor="#FFFFFF"
             android:textSize="12sp"
             tools:text="great wall of india" />
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
         android:layout_below="@+id/Title"
-        android:textColor="#4D759E"
+        android:textColor="#F6D0D0"
         android:textSize="16sp"
         tools:text="PILITICS" />
 
@@ -32,7 +32,7 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#4D759E"
+            android:textColor="#CCE0F4"
             android:textSize="12sp"
             android:layout_below="@+id/Title"
             android:layout_alignParentEnd="true"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/date"
             android:layout_alignParentEnd="true"
-            android:textColor="#4D759E"
+            android:textColor="#C5DAF1"
             android:textSize="12sp"
             tools:text="3:00 PM" />
     <TextView
@@ -64,7 +64,7 @@
         tools:text="by: Author"
         android:layout_below="@+id/TIme"
         android:layout_alignParentEnd="true"
-        android:textColor="#36434E"
+        android:textColor="#FFF8BE"
         />
 
 </RelativeLayout>
